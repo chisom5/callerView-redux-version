@@ -1,0 +1,65 @@
+@font-face {
+    font-family: MetropolisRegular;
+    src: url('../src/assets/Fonts/metropolis/Metropolis-Regular.otf');
+}
+
+@font-face {
+    font-family: MetropolisSemiBold;
+    src: url('../src/assets/Fonts/metropolis/Metropolis-SemiBold.otf');
+}
+
+@font-face {
+    font-family: MetropolisMedium;
+    src: url('../src/assets/Fonts/metropolis/Metropolis-Medium.otf');
+}
+
+@font-face {
+    font-family: MetropolisBlack;
+    src: url('../src/assets/Fonts/metropolis/Metropolis-Black.otf');
+}
+
+@import '../node_modules/font-awesome/css/font-awesome.min.css';
+@import '../node_modules/video-react/dist/video-react.css';
+body {
+    margin: 0;
+    padding: 0;
+    font-family: MetropolisMedium, sans-serif;
+    background: #F5F9FE;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+label {
+    margin: 0;
+    color: #333333;
+}
+
+p {
+    font-family: MetropolisRegular, sans-serif;
+    color: #333333;
+}
+
+h1 {
+    font-family: MetropolisBlack, sans-serif;
+}
+
+h2 {
+    font-family: MetropolisSemiBold, sans-serif;
+}
+
+label {
+    font-family: MetropolisRegular, sans-serif;
+}
+
+#toast-container>.toast-error {
+    background-color: #c00;
+}
+
+#toast-container>.toast-success {
+    background-color: #4BB543;
+}
