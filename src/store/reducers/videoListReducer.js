@@ -75,7 +75,8 @@ const videoListReducer = (state = initialState, action) => {
         case UPDATE_VIDEO_DETAILS:
             return {
                 ...state,
-
+                content: action.payload,
+                modal: false
             }
         case SELECT_CHANGE:
             return {
@@ -94,4 +95,5 @@ const videoListReducer = (state = initialState, action) => {
             return state;
     }
 }
+
 export default videoListReducer;

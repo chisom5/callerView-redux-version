@@ -3,7 +3,6 @@ import type from '../types';
 const {
     UPLOAD_CSV,
     ADD_VIDEO,
-    UPLOAD_VIDEO,
     NEW_REGION,
     NEW_CATEGORY,
     TOGGLE_CSV,
@@ -11,7 +10,7 @@ const {
     ADD_REGION,
     ADD_CATEGORY,
     DISMISS_MODAL,
-    OPEN_MODAL,
+    OPEN_CSV_MODAL,
     END_ADD_VIDEO,
 } = type;
 
@@ -26,14 +25,6 @@ const initialState = {
 
     loading: false,
 
-    storeDetails: {
-        name: "",
-        link: "",
-        category: "",
-        region: "",
-        releaseDate: "",
-        image: ""
-    },
     optionsCategory: [
         { id: "music-video", name: "R&B" },
         { id: "music-video", name: "Hip-pop" }
@@ -50,14 +41,7 @@ const addVideoReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: true,
-                storeDetails: {
-                    name: "",
-                    link: "",
-                    category: "",
-                    region: "",
-                    releaseDate: "",
-                    image: ""
-                }
+
             }
         case END_ADD_VIDEO:
             return {
@@ -77,14 +61,6 @@ const addVideoReducer = (state = initialState, action) => {
                 modalTitle: action.payload.modalTitle
             }
 
-        case UPLOAD_VIDEO:
-            return {
-                ...state,
-                storeDetails: {
-                    ...state.storeDetails,
-                    link: action.payload
-                }
-            }
         case UPLOAD_CSV:
             return {
                 ...state,
@@ -93,7 +69,7 @@ const addVideoReducer = (state = initialState, action) => {
                 csvFile: action.payload.csvFile,
                 isAddCsvButton: !state.isAddCsvButton
             }
-        case OPEN_MODAL:
+        case OPEN_CSV_MODAL:
             return {
                 ...state,
                 modal: !state.modal,

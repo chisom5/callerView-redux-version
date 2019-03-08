@@ -35,6 +35,10 @@ const dispatchDeleteRow = (data) => ({
     type: DELETE_ROW,
     payload: data
 })
+export const handleupdateVideo = (data) => ({
+    type: UPDATE_VIDEO_DETAILS,
+    payload: data
+})
 
 export const openModal = (data) => ({
     type: OPEN_MODAL,
@@ -61,11 +65,8 @@ export const dissmissModal = () => ({
     type: DISMISS_MODAL
 })
 
-// export const editVideo =(data)=> ({
-//     type: EDIT_VIDEO_DETAILS,
-//     payload: data
-// })
 
+// fetch all videos
 export const handleFetchVideos = () => dispatch => {
     const token = localStorage.getItem('CallerView-XXX');
     return axios({
@@ -84,6 +85,7 @@ export const handleFetchVideos = () => dispatch => {
         .catch(err => toastr.error(err))
 }
 
+// fetch all category
 export const handleFetchAllCategory = () => dispatch => {
     const token = localStorage.getItem('CallerView-XXX');
 
@@ -100,6 +102,7 @@ export const handleFetchAllCategory = () => dispatch => {
     }).catch(err => toastr.error(err))
 }
 
+// fetch all region
 export const handleFetchAllRegion = () => dispatch => {
     const token = localStorage.getItem('CallerView-XXX');
 
@@ -116,6 +119,7 @@ export const handleFetchAllRegion = () => dispatch => {
     }).catch(err => toastr.error(err))
 }
 
+// delete a row
 export const handleDeleteRow = (obj) => dispatch => {
     const token = localStorage.getItem('CallerView-XXX');
     return axios({

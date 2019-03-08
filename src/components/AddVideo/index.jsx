@@ -98,8 +98,9 @@ class AddVideo extends Component {
   //  CSV modal
   OpenCsvModal = e => {
     const title = e.target.dataset.title;
+    // const {modalTitle}
     this.setState({modalTitle: title})
-    this.props.OpenCSVmodal();
+    this.props.OpenCsvModal();
   };
 
   // add new category select option
@@ -198,7 +199,7 @@ uploadImage = e => {
     e.preventDefault();
 
     const { videoDetails } = this.state;
-
+    console.log(this.state.videoDetails)
     if (
       videoDetails.name.trim() === "" ||
       videoDetails.category.trim() === "" ||
@@ -214,6 +215,16 @@ uploadImage = e => {
     this.props.add_VideoSuccessful(videoDetails).then(()=>
          this.props.EndAdd_Video()
     )
+    this.setState({
+      videoDetails:{
+        name: "",
+        link: "",
+        category: "",
+        region: "",
+        releaseDate: "",
+        image: ""
+      }
+    })
   };
 
 
@@ -285,7 +296,7 @@ uploadImage = e => {
     }
 
     const token = localStorage.getItem("CallerView-XXX");
-    // const { videoDetails } = this.state;
+    const { videoDetails } = this.state;
 
     this.setState({
       loadingProgress: true,
@@ -321,9 +332,12 @@ uploadImage = e => {
       .then(json => {
         if (json.data.status === 200) {
           //works
-          this.props.UploadVideo(json.data.url);
-
           this.setState({
+            videoDetails: {
+              ...videoDetails,
+              link: json.data.url
+            },
+          
             isUploading: false
           });
           
@@ -355,7 +369,6 @@ uploadImage = e => {
       csvFile,
       border,
       isAddCsvButton,
-      storeDetails,
       optionsCategory,
       optionsRegion,
       loading
@@ -368,7 +381,7 @@ uploadImage = e => {
     // styles
     let children, className, line, hide, view;
 
-    className = storeDetails.link ? "video-active" : null;
+    className = videoDetails.link ? "video-active" : null;
     line = border ? "border" : null;
 
     hide = videoText ? "hide" : null;
@@ -720,7 +733,6 @@ const mapStateToProps = state => ({
   isAddCsvButton: state.addVideoReducer.isAddCsvButton,
   border: state.addVideoReducer.border,
   modal: state.addVideoReducer.modal,
-  storeDetails: state.addVideoReducer.storeDetails,
   loading: state.addVideoReducer.loading,
   optionsCategory: state.addVideoReducer.optionsCategory,
   optionsRegion: state.addVideoReducer.optionsRegion
@@ -731,14 +743,13 @@ const mapDispatchToProps = dispatch => ({
   csvUpload: params => dispatch(actions.csvUpload(params)),
   cancelCsv: () => dispatch(actions.cancelCsv()),
   dismissModal: () => dispatch(actions.dismissModal()),
-  OpenModal: params => dispatch(actions.OpenModal(params)),
+  OpenCsvModal: () => dispatch(actions.OpenCsvModal()),
   NewCategory: params=> dispatch(actions.NewCategory(params)),
   NewRegion: params=> dispatch(actions.NewRegion(params)),
   AddCategory: params=> dispatch(actions.AddCategory(params)),
   AddRegion: params=> dispatch(actions.AddRegion(params)),
   add_VideoSuccessful: (params)=> dispatch(actions.add_VideoSuccessful(params)),
   EndAdd_Video: ()=> dispatch(actions.EndAdd_Video()),
-  UploadVideo: params => dispatch(actions.UploadVideo(params))
 });
 
 export default connect(

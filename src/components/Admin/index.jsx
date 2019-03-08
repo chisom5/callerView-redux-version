@@ -62,7 +62,6 @@ class Admin extends Component {
         this.setState({
           contentAdmin: res.data.data
         });
-        console.log(this.state.contentAdmin)
       })
       .catch(err => console.log(err));
   };

@@ -17,13 +17,12 @@ export {
     csvUpload,
     cancelCsv,
     dismissModal,
-    OpenModal,
+    OpenCsvModal,
     NewCategory,
     NewRegion,
     AddRegion,
     AddCategory,
     EndAdd_Video,
-    UploadVideo,
 }
 from './addVideoAction';
 
@@ -38,6 +37,6 @@ export {
     openEditRow,
     dissmissModal,
     handleSelectChange,
-
+    handleupdateVideo
 }
 from './videoListAction';

@@ -69,7 +69,7 @@ class TableList extends Component {
       categories: this.props.category,
       regions: this.props.region,
       selected: [],
-      // activeRow: this.props.activeRow,
+
       content:this.props.content,
       videoDetails: {
         name: "",
@@ -260,6 +260,7 @@ class TableList extends Component {
       content: content[result]
     };
     this.props.handleDeleteRow(obj);
+    this.props.handleFetchVideos()
   };
 
   // display row inside modal
@@ -290,6 +291,7 @@ class TableList extends Component {
     }
     // this.props.getVideoDetails(result)
     this.setState({
+      activeId: id,
       videoDetails: {
         ...videoDetails,
         name: result.name,
@@ -433,6 +435,7 @@ class TableList extends Component {
 
     const { videoDetails, activeId } = this.state;
     const {content} = this.props;
+    
     const token = localStorage.getItem("CallerView-XXX");
 
     if (
@@ -468,15 +471,18 @@ class TableList extends Component {
           }
         }
 
+        // dispatch action here
+        this.props.handleupdateVideo(content)
+        this.props.handleFetchVideos()
+        this.props.dismissable()
+
         this.setState({
-          content,
-          modal: false,
           loading: false
         });
       })
       .catch(error => {
         toastr.error(error);
-
+        console.log(error)
         this.setState({
           loading: false
         });
@@ -821,8 +827,8 @@ const mapDispatchToProps = dispatch => ({
   statusNo: () => dispatch(actions.statusNo()),
   openEditRow: params => dispatch(actions.openEditRow(params)),
   dissmissModal: () => dispatch(actions.dissmissModal()),
-  handleSelectChange: (params)=> dispatch(actions.handleSelectChange(params))
-
+  handleSelectChange: (params)=> dispatch(actions.handleSelectChange(params)),
+  handleupdateVideo: (params)=> dispatch(actions.handleupdateVideo(params))
 });
 
 export default connect(

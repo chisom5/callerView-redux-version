@@ -6,12 +6,11 @@ import toastr from 'toastr';
 const {
     UPLOAD_CSV,
     ADD_VIDEO,
-    UPLOAD_VIDEO,
     TOGGLE_CSV,
     CANCEL_CSV,
     END_ADD_VIDEO,
     DISMISS_MODAL,
-    OPEN_MODAL,
+    OPEN_CSV_MODAL,
     NEW_CATEGORY,
     NEW_REGION,
     ADD_REGION,
@@ -20,6 +19,7 @@ const {
 
 const addVideo = () => ({
     type: ADD_VIDEO,
+    // payload: data
 })
 
 export const NewRegion = (data) => ({
@@ -46,14 +46,12 @@ export const csvUpload = (csvObj) => ({
     payload: csvObj
 })
 
-export const UploadVideo = (data) => ({
-    type: UPLOAD_VIDEO,
-    payload: data
+// export const OpenModal = () => ({
+//     type: OPEN_MODAL,
+// })
+export const OpenCsvModal = () => ({
+    type: OPEN_CSV_MODAL
 })
-export const OpenModal = () => ({
-    type: OPEN_MODAL,
-})
-
 export const EndAdd_Video = () => ({
     type: END_ADD_VIDEO
 })
@@ -78,7 +76,7 @@ export const add_VideoSuccessful = (Details) => dispatch => {
                 Authorization: `Bearer ${token}`
             }
         }).then(res => {
-
+            // let result = res.data.data;
             dispatch(addVideo());
             toastr.success('Video details successfully added');
 
